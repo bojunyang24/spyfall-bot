@@ -1,0 +1,5 @@
+# This stores the bot key
+discord_config.json
+
+# node modules
+node_modules
