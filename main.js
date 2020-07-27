@@ -25,13 +25,12 @@ client.on('message', message => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if(command === 'ping') {
-    message.channel.send('pong!');
-    console.log('ponged');
-  } else if (command === 'socials') {
-    message.channel.send('https://www.instagram.com/bojun24/');
-  } else if (command === 'yeet') {
+  if (command === 'yeet') {
     client.commands.get('yeet').execute(message, args);
+  } else if (command === "succ?") {
+    client.commands.get('succ?').execute(message, args);
+  } else if (command === 'succme') {
+    client.commands.get('succme').execute(message, args);
   }
 });
 
