@@ -25,10 +25,10 @@ client.on('message', message => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === 'yeet') {
-    client.commands.get('yeet').execute(message, args);
+  if (command === 'unsucc') {
+    client.commands.get('unsucc').execute(message, args);
   } else if (command === "succ?") {
-    client.commands.get('succ?').execute(message, args);
+    client.commands.get('succ').execute(message, args);
   } else if (command === 'succme') {
     client.commands.get('succme').execute(message, args);
   }
