@@ -39,9 +39,9 @@ client.on('message', message => {
     case 'succme':
       client.commands.get('get_bot_role').execute(message, args);
       break;
-      case 'unsucc':
-        client.commands.get('remove_bot_role').execute(message, args);
-        break;
+    case 'unsucc':
+      client.commands.get('remove_bot_role').execute(message, args);
+      break;
     default:
       break;
   }
