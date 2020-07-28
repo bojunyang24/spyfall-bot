@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'unsucc',
-  description: 'unsuccs!',
+  name: 'remove_bot_role',
+  description: 'Removes the bot testing role from the member',
   execute(message, args) {
     if (message.member.roles.cache.has('737473271464984590')) {
       message.channel.send('Succ begone');

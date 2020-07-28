@@ -1,9 +1,9 @@
 module.exports = {
-  name: 'succme',
-  description: 'permissions test',
+  name: 'get_bot_role',
+  description: 'Gives member the role for bot testing',
   execute(message, args) {
     if (message.member.roles.cache.has('737473271464984590')) {
-      message.channel.send('You are already authorized');
+      message.channel.send('You have already received the succ');
     } else {
       message.channel.send('You have been knighted a succ');
       message.member.roles.add('737473271464984590').catch(console.error);
