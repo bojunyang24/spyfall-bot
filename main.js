@@ -1,7 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const Spyfall = require('./spyfall/Spyfall');
+
 
 const client = new Discord.Client();
+
+const SpyfallGame = new Spyfall();
 
 const prefix = '-';
 
@@ -42,6 +46,8 @@ client.on('message', message => {
     case 'unsucc':
       client.commands.get('remove_bot_role').execute(message, args);
       break;
+    case 'spyfall':
+      play_spyfall(message, args);
     default:
       break;
   }
@@ -55,3 +61,28 @@ fs.readFile('./discord_config.json', (err, jsonString) => {
   discord_config = JSON.parse(jsonString);
   client.login(discord_config.bot_token);
 });
+
+function play_spyfall(message, args) {
+  if (!checkSpyfallArgs(args)) {
+    message.channel.send("Possible commands for -spyfall:\nvote {number of voters} {suspect name}");
+  }
+  switch (args[0]) {
+    case 'init':
+      SpyfallGame.init(message);
+      break;
+    case 'start':
+      SpyfallGame.start(message);
+      break;
+    case 'vote':
+      args.shift();
+      suspect = args.shift();
+      SpyfallGame.vote(suspect);
+      break;
+    default:
+      break;
+  }
+}
+
+function checkSpyfallArgs(args) {
+  return args.length === 0 ? false : true;
+}
