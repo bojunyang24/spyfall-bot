@@ -42,6 +42,7 @@ class Spyfall {
       message.channel.send("A game of Spyfall has not been initated. Please use command -spyfall init to begin playing");
       return;
     }
+    this.started = true;
     this.spy_emoji_collector.stop();
     console.log('Reaction collector stopped');
     console.log('Players: ');
@@ -56,8 +57,10 @@ class Spyfall {
   }
 
   vote(suspect) {
-    if (!this.initiated || !suspect || !suspect.startsWith('<@')) {
-      message.channel.send("Please specfiy who you want to accuse by @-ing them");
+    if (!this.initiated || !this.started) {
+      this.channel.send("Please make sure to start the game with init, then start");
+    } else if (!suspect || !suspect.startsWith('<@')) {
+      this.channel.send("Please specfiy who you want to accuse by @-ing them");
       return;
     }
     
@@ -87,7 +90,9 @@ class Spyfall {
   }
 
   end() {
-
+    this.initiated = false;
+    this.started = false;
+    this.channel.send("Game has been reset. Please init again to play another one")
   }
 
   getUserFromId(userId) {

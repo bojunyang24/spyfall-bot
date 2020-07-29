@@ -78,6 +78,8 @@ function play_spyfall(message, args) {
       suspect = args.shift();
       SpyfallGame.vote(suspect);
       break;
+    case 'end':
+      SpyfallGame.end();
     default:
       break;
   }
