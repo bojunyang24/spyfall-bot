@@ -41,6 +41,9 @@ class Spyfall {
     if (!this.initiated) {
       message.channel.send("A game of Spyfall has not been initated. Please use command -spyfall init to begin playing");
       return;
+    } else if (this.players.size < 3) {
+      this.channel.send("There needs to be at least 3 players in the game. Please react to the init message above to join the game");
+      return;
     }
     this.started = true;
     this.spy_emoji_collector.stop();
@@ -92,6 +95,7 @@ class Spyfall {
   end() {
     this.initiated = false;
     this.started = false;
+    this.players = null;
     this.channel.send("Game has been reset. Please init again to play another one")
   }
 
