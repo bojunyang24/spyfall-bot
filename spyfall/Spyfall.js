@@ -59,7 +59,7 @@ class Spyfall {
     this.channel.send(start_message + "!");
   }
 
-  vote(suspect) {
+  async vote(suspect) {
     if (!this.initiated || !this.started) {
       this.channel.send("Please make sure to start the game with init, then start");
     } else if (!suspect || !suspect.startsWith('<@')) {
@@ -77,19 +77,15 @@ class Spyfall {
       }
     });
 
-    this.privateVotes.forEach(vote => vote.requestVote(suspectUser.username));
-    let unanimous = true;
-    this.privateVotes.forEach(vote => {
-      if (!vote.vote) {
-        unanimous = false;
-      }
-    })
+    const requestedVotes = this.privateVotes.map(privateVote => privateVote.requestVote(suspectUser.username).then(vote => vote));
 
-    // if (unanimous) {
-    //   this.channel.send("The vote was unanimous!");
-    // } else {
-    //   this.channel.send("There was at least 1 failed vote");
-    // }
+    await Promise.all(requestedVotes);
+
+    if(this.privateVotes.every(response => response.vote == true)) {
+      this.channel.send("The vote was unanimous");
+    } else {
+      this.channel.send("The vote was not unanimous");
+    }
   }
 
   end() {

@@ -37,6 +37,9 @@ client.on('message', message => {
     .toLowerCase();
 
   switch (command) {
+    case 'butt':
+      message.channel.send('bot');
+      break;
     case 'succ?':
       client.commands.get('has_bot_role').execute(message, args);
       break;
