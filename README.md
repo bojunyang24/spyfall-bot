@@ -1,4 +1,4 @@
-# ButtBot
+# Spyfall Bot
 
 Personal project to make a discord bot to play some party games
 
